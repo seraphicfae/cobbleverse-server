@@ -1,4 +1,9 @@
 services:
+  playit:
+    image: ghcr.io/playit-cloud/playit-agent:0.15
+    network_mode: host
+    environment:
+      - SECRET_KEY=YOUR_KEY_HERE
   mc-modpack-installer:
     user: "0:0"
     build:
