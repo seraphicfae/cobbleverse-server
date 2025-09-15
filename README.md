@@ -1,5 +1,5 @@
 # Cobbleverse Server In Docker Compose
-first off, this is mostly taken from https://github.com/Blue-Kachina/cobbleverse_server \
+First off, this is mostly taken from https://github.com/Blue-Kachina/cobbleverse_server \
 I'm simply doing things to adjust to my system
 
 ## What Exactly Is This?
