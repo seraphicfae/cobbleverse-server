@@ -14,8 +14,8 @@ services:
       - ./data:/data
       - ./scripts:/scripts
     environment:
-      MODRINTH_URL: ${MODRINTH_URL:-https://cdn.modrinth.com/data/Jkb29YJU/versions/UIAtF4al/COBBLEVERSE%201.5.5.mrpack}
-      SERVER_WORLDNAME: ${SERVER_WORLDNAME:-CobbleVerse}
+      MODRINTH_URL: ${MODRINTH_URL:-}
+      SERVER_WORLDNAME: ${SERVER_WORLDNAME:-}
     entrypoint: ["/bin/sh", "/scripts/install-modpack.sh"]
 
   mc:
@@ -27,19 +27,19 @@ services:
       FABRIC_LOADER_VERSION: "0.17.2"
       FABRIC_LAUNCHER_VERSION: "1.1.0"
       MEMORY: "6G"
-      SERVER_WORLDNAME: ${SERVER_WORLDNAME:-CobbleVerse}
-      LEVEL: ${SERVER_WORLDNAME:-CobbleVerse}
+      SERVER_WORLDNAME: ${SERVER_WORLDNAME:-}
+      LEVEL: ${SERVER_WORLDNAME:-}
       ENABLE_WHITELIST: "false"
       DEBUG: ${DEBUG:-False}
-      SERVER_NAME: ${SERVER_NAME_-CobbleVerse}
+      SERVER_NAME: ${SERVER_NAME:-}
+      MOTD: ${SERVER_MOTD:-}
       ICON: ${SERVER_ICON:-}
-      ALLOW_FLIGHT: ${ALLOW_FLIGHT:-True}
-      SPAWN_MONSTERS: ${SPAWN_MONSTERS:-False}
+      ALLOW_FLIGHT: ${ALLOW_FLIGHT:-}
+      SPAWN_MONSTERS: ${SPAWN_MONSTERS:-}
 
     volumes:
       - ./modpack:/modpack
       - ./data:/data
-      - ./worlds:/data/worlds
       - ./scripts/wait-for-modpack.sh:/wait-for-modpack.sh
     entrypoint: ["/bin/sh", "/wait-for-modpack.sh"]
     command: []
