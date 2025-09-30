@@ -41,4 +41,5 @@ Run the command: `docker compose exec mc-backup /usr/bin/backup now` This will c
 
 ### Importing a backup to the server
 > IMPORTANT: shutdown the server via `docker compose down` to ensure data transfer stops entirely
+
 Run the command: `tar -xzf ./backups/<your-backup-filename>.tgz -C ./data` Adjust for your world name, and timestamp, as well as making sure you're in the working directory of the server
