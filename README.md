@@ -1,6 +1,5 @@
 # Cobbleverse Server In Docker Compose
-First off, this is mostly taken from https://github.com/Blue-Kachina/cobbleverse_server \
-I'm simply doing things to adjust to my system
+First off, this is mostly taken from https://github.com/Blue-Kachina/cobbleverse_server
 
 ## What Exactly Is This?
 ### Cobbleverse
@@ -34,3 +33,12 @@ My recommendation is that you use the [Modrinth App](https://modrinth.com/app). 
 Once in, simply put in the address of your server.  If you're on the same machine, you can use `localhost` or `127.0.0.1`.
 Sometimes you need to specify the port number too.  This server will be utilizing port `25565`.
 This means you could use `localhost:25565` or `127.0.0.1:localhost`
+
+## How to manage backups?
+### Triggering a manual backup
+Run the command: `docker compose exec mc-backup /usr/bin/backup now` This will create a backup of the current world as a tgz.
+(You can safely run the command while the server is running. The server will be paused via RCON.)
+
+### Importing a backup to the server
+> IMPORTANT: shutdown the server via `docker compose down` to ensure data transfer stops entirely
+Run the command: `tar -xzf ./backups/<your-backup-filename>.tgz -C ./data` Adjust for your world name, and timestamp, as well as making sure you're in the working directory of the server

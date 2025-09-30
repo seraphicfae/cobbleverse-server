@@ -1,9 +1,9 @@
 services:
-  # playit:
-  #   image: ghcr.io/playit-cloud/playit-agent:0.15
-  #   network_mode: host
-  #   environment:
-  #     - SECRET_KEY=YOUR_KEY_HERE
+  #  playit:
+  #    image: ghcr.io/playit-cloud/playit-agent:0.15
+  #    network_mode: host
+  #    environment:
+  #      - SECRET_KEY=
   mc-modpack-installer:
     user: "0:0"
     build:
@@ -30,13 +30,13 @@ services:
       SERVER_WORLDNAME: ${SERVER_WORLDNAME:-}
       LEVEL: ${SERVER_WORLDNAME:-}
       ENABLE_WHITELIST: "false"
-      DEBUG: ${DEBUG:-False}
+      DEBUG: ${DEBUG:-false}
       SERVER_NAME: ${SERVER_NAME:-}
       MOTD: ${SERVER_MOTD:-}
       ICON: ${SERVER_ICON:-}
+      RCON_PASSWORD: ${RCON_PASSWORD}
       ALLOW_FLIGHT: ${ALLOW_FLIGHT:-}
       SPAWN_MONSTERS: ${SPAWN_MONSTERS:-}
-
     volumes:
       - ./modpack:/modpack
       - ./data:/data
@@ -45,6 +45,26 @@ services:
     command: []
     ports:
       - "25565:25565"
+      - "25575:25575"
     depends_on:
       - mc-modpack-installer
+    restart: unless-stopped
+
+  mc-backup:
+    image: itzg/mc-backup:latest
+    container_name: mc-backup
+    environment:
+      BACKUP_NAME: ${SERVER_WORLDNAME}
+      PRUNE_BACKUPS_COUNT: ${KEEP_BACKUPS:-5}
+      BACKUP_INTERVAL: ${BACKUP_INTERVAL:-12h}
+      RCON_PASSWORD: ${RCON_PASSWORD}
+      RCON_HOST: mc
+      TZ: ${TZ:-UTC}
+    volumes:
+      - ./data:/data:ro
+      - ./backups:/backups
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    depends_on:
+      - mc
     restart: unless-stopped
