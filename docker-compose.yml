@@ -14,8 +14,8 @@ services:
       - ./data:/data
       - ./scripts:/scripts
     environment:
-      MODRINTH_URL: ${MODRINTH_URL:-}
-      SERVER_WORLDNAME: ${SERVER_WORLDNAME:-}
+      MODRINTH_URL: ${MODRINTH_URL}
+      SERVER_WORLDNAME: ${SERVER_WORLDNAME}
     entrypoint: ["/bin/sh", "/scripts/install-modpack.sh"]
 
   mc:
@@ -25,11 +25,11 @@ services:
       TYPE: "FABRIC"
       VERSION: "1.21.1"
       MEMORY: "6G"
-      SERVER_WORLDNAME: ${SERVER_WORLDNAME:-}
-      LEVEL: ${SERVER_WORLDNAME:-}
-      SERVER_NAME: ${SERVER_NAME:-}
-      MOTD: ${SERVER_MOTD:-}
-      ICON: ${SERVER_ICON:-}
+      SERVER_WORLDNAME: ${SERVER_WORLDNAME}
+      LEVEL: ${SERVER_WORLDNAME}
+      SERVER_NAME: ${SERVER_NAME}
+      MOTD: ${SERVER_MOTD}
+      ICON: ${SERVER_ICON}
       RCON_PASSWORD: ${RCON_PASSWORD}
       ALLOW_FLIGHT: "true"
       SPAWN_MONSTERS: "false"
@@ -54,11 +54,11 @@ services:
     container_name: mc-backup
     environment:
       BACKUP_NAME: ${SERVER_WORLDNAME}
-      PRUNE_BACKUPS_COUNT: ${KEEP_BACKUPS:-5}
-      BACKUP_INTERVAL: ${BACKUP_INTERVAL:-12h}
+      PRUNE_BACKUPS_COUNT: ${KEEP_BACKUPS}
+      BACKUP_INTERVAL: ${BACKUP_INTERVAL}
       RCON_PASSWORD: ${RCON_PASSWORD}
       RCON_HOST: mc
-      TZ: ${TZ:-UTC}
+      TZ: ${TZ}
     volumes:
       - ./data:/data:ro
       - ./backups:/backups
