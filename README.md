@@ -1,4 +1,4 @@
-# Cobbleverse Server In Docker Compose
+### Cobbleverse Server In Docker Compose
 First off, this is mostly taken from https://github.com/Blue-Kachina/cobbleverse_server
 
 ## What Exactly Is This?
@@ -8,15 +8,13 @@ Cobbleverse is a modpack (collection of mods) for Java Minecraft that bring an e
 ### Docker
 Docker is a way of containerizing applications and their dependencies, and does so in a way very akin to virtual machines
 
-### This Particular Solution
-This solution will help you set up your own Cobblemon server
-
 ## Instructions
 ### First Run
 1) Ensure that you already have Docker/Docker Compose installed
 2) Clone the repository
 3) Navigate to the folder you cloned this repo to
-4) Run the command: `docker-compose up -d` This will instantiate your server (will probably take a minute or two)
+4) Edit the .env file to your liking. You may edit the docker-compose.yml directly if you wish for a fine tuned config
+5) Run the command: `docker-compose up -d` This will instantiate your server (will take a minute or two)
 
 #### What will happen when I do this?
 1) The system will check to see if the worldname you specified has already been used
@@ -29,17 +27,26 @@ The server is using a modpack known as [Cobbleverse](https://modrinth.com/modpac
 This modpack includes Cobblemon as well as many sidemods to help recreate a Pokemon-like experience.
 If your server is running mods, then your Minecraft client (the game itself) also needs to have the same mods.
 
-My recommendation is that you use the [Modrinth App](https://modrinth.com/app).  Once it's installed, you can follow the Cobbleverse link above, and it will prompt you to install it into the Modrinth app.  Proceed to do that.  Once you've done that, then you'll actually be able to launch the proper version of Minecraft (equipped with mods) directly from Modrinth there.  That's the recommended approach.
-Once in, simply put in the address of your server.  If you're on the same machine, you can use `localhost` or `127.0.0.1`.
-Sometimes you need to specify the port number too.  This server will be utilizing port `25565`.
-This means you could use `localhost:25565` or `127.0.0.1:localhost`
+My recommendation is that you use the [Modrinth App](https://modrinth.com/app). Once it's installed, you can follow the Cobbleverse link above, and it will prompt you to install it into the Modrinth app. Proceed to do that. Once you've done that, then you'll actually be able to launch the proper version of Minecraft (equipped with mods) directly from Modrinth there. That's the recommended approach.
+Once in, simply put in the address of your server. If you're on the same machine, you can use `localhost` or `127.0.0.1`.
+Sometimes you need to specify the port number too. This server will be utilizing port `25565`.
+This means you could use `localhost:25565` or `127.0.0.1:localhost`.
+
+## How to give myself op?
+### Using rcon-cli:
+```bash
+sudo docker exec -it cobbleverse-server-mc-1 bash
+rcon-cli op YOUR_USERNAME
+exit
+```
 
 ## How to manage backups?
 ### Triggering a manual backup
 Run the command: `docker compose exec mc-backup /usr/bin/backup now` This will create a backup of the current world as a tgz.
-(You can safely run the command while the server is running. The server will be paused via RCON.)
+(You can safely run the command while the server is running. The server will be paused via RCON)
 
 ### Importing a backup to the server
-> IMPORTANT: shutdown the server via `docker compose down` to ensure data transfer stops entirely
+> IMPORTANT: shutdown the server via `docker compose down` to ensure data transfer stops entirely.
 
-Run the command: `tar -xzf ./backups/<your-backup-filename>.tgz -C ./data` Adjust for your world name, and timestamp, as well as making sure you're in the working directory of the server
+Run the command: `tar -xzf ./backups/<your-backup-filename>.tgz -C ./data` Adjust for your world name, and timestamp, as well as making sure you're in the working directory of the server.
+Simply start the server again and ta-da!

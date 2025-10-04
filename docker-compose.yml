@@ -1,6 +1,6 @@
 services:
   #  playit:
-  #    image: ghcr.io/playit-cloud/playit-agent:0.15
+  #    image: ghcr.io/playit-cloud/playit-agent:0.16
   #    network_mode: host
   #    environment:
   #      - SECRET_KEY=
@@ -24,19 +24,18 @@ services:
       EULA: "true"
       TYPE: "FABRIC"
       VERSION: "1.21.1"
-      FABRIC_LOADER_VERSION: "0.17.2"
-      FABRIC_LAUNCHER_VERSION: "1.1.0"
       MEMORY: "6G"
       SERVER_WORLDNAME: ${SERVER_WORLDNAME:-}
       LEVEL: ${SERVER_WORLDNAME:-}
-      ENABLE_WHITELIST: "false"
-      DEBUG: ${DEBUG:-false}
       SERVER_NAME: ${SERVER_NAME:-}
       MOTD: ${SERVER_MOTD:-}
       ICON: ${SERVER_ICON:-}
       RCON_PASSWORD: ${RCON_PASSWORD}
-      ALLOW_FLIGHT: ${ALLOW_FLIGHT:-}
-      SPAWN_MONSTERS: ${SPAWN_MONSTERS:-}
+      ALLOW_FLIGHT: "true"
+      SPAWN_MONSTERS: "false"
+      ENABLE_COMMAND_BLOCK: "true"
+      ENABLE_WHITELIST: "false"
+      DEBUG: "false"
     volumes:
       - ./modpack:/modpack
       - ./data:/data
