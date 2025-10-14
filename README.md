@@ -35,7 +35,7 @@ This means you could use `localhost:25565` or `127.0.0.1:localhost`.
 ## How to give myself op?
 ### Using rcon-cli:
 ```bash
-sudo docker exec -it cobbleverse-server-mc-1 bash
+docker exec -it cobbleverse-server-mc-1 bash
 rcon-cli op YOUR_USERNAME
 exit
 ```
